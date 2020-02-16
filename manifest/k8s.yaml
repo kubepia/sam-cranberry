@@ -35,7 +35,42 @@ spec:
       containers:
         - name: sam-cranberry-cms
           image: myguddy/sam-cranberry-cms:v1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
+          ports:
+          - name: spring
+            containerPort: 8080
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sam-cranberry-cms-v2
+  labels:
+    app: sam-cranberry-cms
+    version: v2
+spec:
+  selector:
+    matchLabels:
+      app: sam-cranberry-cms
+      version: v2
+  replicas: 1
+  template:
+    metadata:
+      name: sam-cranberry-cms
+      labels:
+        app: sam-cranberry-cms
+        version: v2
+    spec:
+      containers:
+        - name: sam-cranberry-cms
+          image: myguddy/sam-cranberry-cms:v2
+          imagePullPolicy: Always
           ports:
           - name: spring
             containerPort: 8080

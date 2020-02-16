@@ -5,6 +5,7 @@ package io.nogada.sam.cranberry.cms.content;
  */
 public class Content {
     public Content(){
+        this.version="v2";
         this.name = "name";
         this.thumbnail = "thumbnail";
         this.streammURL = "streammURL";
@@ -13,6 +14,7 @@ public class Content {
         this.date = "date";
         this.nationality = "nationality";
     }
+    private String version;
     private String name;
     private String thumbnail;
     private String streammURL;
@@ -21,6 +23,13 @@ public class Content {
     private String date;
     private String nationality;
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
     public String getName() {
         return name;
     }
