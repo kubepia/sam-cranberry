@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sam-cranberry-cms
+spec:
+  type: ClusterIP
+  selector:
+    app: sam-cranberry-cms
+  ports:
+    - name: spring
+      port: 8080
+      targetPort: spring
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sam-cranberry-cms-v1
+  labels:
+    app: sam-cranberry-cms
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: sam-cranberry-cms
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      name: sam-cranberry-cms
+      labels:
+        app: sam-cranberry-cms
+        version: v1
+    spec:
+      containers:
+        - name: sam-cranberry-cms
+          image: myguddy/sam-cranberry-cms:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+          - name: spring
+            containerPort: 8080
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
