@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sam-cranberry-cms
+spec:
+  hosts:
+    - sam-cranberry-cms
+  http:
+  - route:
+    - destination:
+        host: sam-cranberry-cms
+        subset: v2
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: sam-cranberry-cms
+spec:
+  host: sam-cranberry-cms
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
