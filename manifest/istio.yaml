@@ -9,7 +9,12 @@ spec:
   - route:
     - destination:
         host: sam-cranberry-cms
+        subset: v1
+      weight: 20
+    - destination:
+        host: sam-cranberry-cms
         subset: v2
+      weight: 80
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
